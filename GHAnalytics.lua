@@ -1,9 +1,8 @@
-
 --Private Properties
 local json = require("json")
 local guid = require("GUID")
 
-local apiKey = "5eaf423f19978cb3a26b9b2d484ecbcc878fd2cf"
+local apiKey = "your_api_Key"
 local playerIdentifier;
 local deviceIdentifier;
 
