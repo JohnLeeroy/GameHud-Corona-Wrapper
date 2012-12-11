@@ -139,12 +139,12 @@ local ghAnalytics = {}
 
 ghAnalytics.Init = function(_apiKey, playerID)
 	if(_apiKey == nil or _apiKey:len() == 0) then
-		print("Warning: Invalid API Key);
+		print("Warning: Invalid API Key");
 	else
 		apiKey = _apiKey;
 	end
 	playerIdentifier = playerID or "";
-	deviceIdentifier = system.getInf("deviceIdentifier");	--Edit Later
+	deviceIdentifier = system.getInfo("deviceID");	--Edit Later
 	
 	if(playerIdentifier:len() > 0) then
 		identifierString = "gh_player_identifier=" .. playerIdentifier .. "&";
