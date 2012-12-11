@@ -130,7 +130,6 @@ local function onAppClose(event)
 		WriteEventCache();
 		EndSession();
 	elseif(event.type == 'applicationResume') then
-		EndSession();
 		StartSession();
 	end
 end
@@ -138,10 +137,15 @@ end
 --Public Methods
 local ghAnalytics = {}
 
-ghAnalytics.Init = function(playerID, deviceID)
+ghAnalytics.Init = function(_apiKey, playerID)
+	if(_apiKey == nil or _apiKey:len() == 0) then
+		print("Warning: Invalid API Key);
+	else
+		apiKey = _apiKey;
+	end
 	playerIdentifier = playerID or "";
-	deviceIdentifier = deviceID or "";
-
+	deviceIdentifier = system.getInf("deviceIdentifier");	--Edit Later
+	
 	if(playerIdentifier:len() > 0) then
 		identifierString = "gh_player_identifier=" .. playerIdentifier .. "&";
 	end
@@ -163,12 +167,20 @@ ghAnalytics.EndSession = function()
 	EndSession();
 end
 
-ghAnalytics.SendEvent = function(eventName, params)
+ghAnalytics.QueueEvent = function(eventName, params)
 	if(sessionID =="-1") then
-		print("Session has ended.  Restart Session.");
+		print("Session has ended.  Restarting Session.");
+		StartSession();
 	end
 	addEventToQueue(eventName,params);
-	--SendEvent(eventName, params)
+end
+
+ghAnalytics.SendEvent = function(eventName, params)
+	if(sessionID =="-1") then
+		print("Session has ended.  Restarting Session.");
+		StartSession();
+	end
+	SendEvent(eventName, params)	
 end
 
 ghAnalytics.SendPlayer = function(params)
@@ -210,9 +222,9 @@ ghAnalytics.LoadEventQueue = function()
 end
 
 --Send Event Queue in timed intervals
--- interval : time inproperties milliseconds
-ghAnalytics.SetSendQueueTimer = function(seconds)
-	timer.performWithDelay(seconds, ghAnalytics.SendEventQueue, 0);
+-- interval : time in milliseconds
+ghAnalytics.SetSendQueueTimer = function(interval)
+	timer.performWithDelay(interval, ghAnalytics.SendEventQueue, 0);
 end
 
 return ghAnalytics;
