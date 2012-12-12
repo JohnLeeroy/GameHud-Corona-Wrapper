@@ -137,6 +137,9 @@ end
 --Public Methods
 local ghAnalytics = {}
 
+-- ghAnalytics.Init should be called first
+-- apiKey is mandatory
+-- playerID is optional
 ghAnalytics.Init = function(_apiKey, playerID)
 	if(_apiKey == nil or _apiKey:len() == 0) then
 		print("Warning: Invalid API Key");
@@ -144,10 +147,12 @@ ghAnalytics.Init = function(_apiKey, playerID)
 		apiKey = _apiKey;
 	end
 	playerIdentifier = playerID or "";
-	deviceIdentifier = system.getInfo("deviceID");	--Edit Later
+	deviceIdentifier = system.getInfo("deviceID");	--Edit Later or if it is deprecated by Apple.  
 	
 	if(playerIdentifier:len() > 0) then
 		identifierString = "gh_player_identifier=" .. playerIdentifier .. "&";
+	else
+		playerIdentifier = deviceIdentifier;
 	end
 
 	if(deviceIdentifier:len() > 0) then

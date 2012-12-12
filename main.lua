@@ -11,7 +11,7 @@ local function main()
   
   --Insert the API Key that can be found in the GAMEhud website and a unique player ID.
   --Call this function first.
-  ghAnalytics.Init("insert_api_key", playerID);
+  ghAnalytics.Init("insert_api_key", "optional_PlayerID");
   
   --Starts the player session.
   ghAnalytics.StartSession();
@@ -30,7 +30,6 @@ local function main()
   --This sends off player data immediately.
   --You can add any properties you want.
   local playerData = {}
-  playerData.age = 21;
   playerData.name = "John Li";
   playerData.location = "Orlando, FL"
   ghAnalytics.SendPlayer(playerData)
