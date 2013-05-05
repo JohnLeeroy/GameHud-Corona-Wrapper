@@ -147,8 +147,13 @@ ghAnalytics.Init = function(_apiKey, playerID)
 		apiKey = _apiKey;
 	end
 	playerIdentifier = playerID or "";
-	deviceIdentifier = system.getInfo("deviceID");	--Edit Later or if it is deprecated by Apple.  
-	
+
+	if(system.getInfo("platformName") == "iPhone OS") then
+		deviceIdentifier = system.getInfo("iosIdentifierForVendor") or system.getInfo("deviceID");	--iosIdentifierForVendor is available after version 1095, else return hashed mac address
+	else
+		deviceIdentifier = system.getInfo("deviceID");	
+	end
+
 	if(playerIdentifier:len() > 0) then
 		identifierString = "gh_player_identifier=" .. playerIdentifier .. "&";
 	else
