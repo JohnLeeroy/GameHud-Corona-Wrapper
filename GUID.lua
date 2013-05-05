@@ -17,7 +17,7 @@ GUID.Generate = function()
 		local version = system.getInfo("platformVersion");
 		hash = crypto.digest(crypto.md5, deviceID .. version .. time);
 	elseif(platform == "iPhone OS") then
-		local deviceName = system.getInfO("name");
+		local deviceName = system.getInfo("name");
 		local deviceModel = system.getInfo("architectureInfo");
 		hash = crypto.digest(crypto.md5, deviceName .. deviceModel.. time);
 	else
