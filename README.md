@@ -9,20 +9,20 @@ Feel free to contact me at JohnLiGlobal@gmail.com
 
 ##How To
 ###Initialize
-```
+```lua
 local ghAnalytics = require("GHAnalytics")
 ghAnalytics.Init("insert_api_key", "optional_PlayerID");
 ghAnalytics.StartSession();
 ```
 
 ###Basic events
-```
+```lua
 local params = {StringProperty="ThisIsAString", NumberProperty=1234}
 ghAnalytics.SendEvent("EventName", params)
 ```
 
   
-```
+```lua
 local playerData = {}
 playerData.name = "John Li";
 playerData.location = "Orlando, FL"
