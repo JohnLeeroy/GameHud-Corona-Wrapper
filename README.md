@@ -30,7 +30,7 @@ ghAnalytics.SendPlayer(playerData)
 ```
 
 
-```
+```lua
 local deviceData = {}
 deviceData.platform = "PC"
 deviceData.OS = "Windows 7"
@@ -40,7 +40,7 @@ ghAnalytics.SendDevice(deviceData)
 
 You can add optional parameters to most events.
 ###Queued Events
-```
+```lua
 ghAnalytics.SetSendQueueTimer(5000)  //accepts milliseconds
   
 local params = {StringProperty="ThisIsAString", NumberProperty=1234}
